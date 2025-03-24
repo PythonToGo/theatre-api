@@ -33,6 +33,7 @@ class GenreViewSet(viewsets.ModelViewSet):
 
 class PlayViewSet(viewsets.ModelViewSet):
     queryset = Play.objects.all()
+    serializer_class = PlaySerializer
     filter_backends = [filters.SearchFilter]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'description'] # ?search=taey
@@ -62,6 +63,9 @@ class ReservationViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
+        # if swagger_fake_view is True, return empty queryset
+        if getattr(self, 'swagger_fake_view', False):
+            return Reservation.objects.none()
         return Reservation.objects.filter(user=self.request.user)
 
     def get_serializer_class(self):
