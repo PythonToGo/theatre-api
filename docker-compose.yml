@@ -1,0 +1,20 @@
+version: '3.12'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: theatre_db
+      POSTGRES_USER: theatre_user
+      POSTGRES_PASSWORD: theatre123
+    # ports:
+    #   - "5432:5432"
