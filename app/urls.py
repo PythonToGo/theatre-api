@@ -17,6 +17,7 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=[permissions.AllowAny]
 )
+
 def homepage(request):
     return HttpResponse("""
     <!DOCTYPE html>
@@ -27,7 +28,7 @@ def homepage(request):
         <style>
             body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background: linear-gradient(135deg, #2c3e50, #3498db);
+                background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
                 color: white;
                 text-align: center;
                 padding: 80px;
@@ -51,6 +52,7 @@ def homepage(request):
             }
             a {
                 display: inline-block;
+                margin: 10px;
                 padding: 12px 24px;
                 background-color: #ffffff;
                 color: #2c3e50;
@@ -68,16 +70,22 @@ def homepage(request):
         <div class="container">
             <h1>🎭 Welcome to Theatre API</h1>
             <p>This is the backend API service for online theatre reservation system.</p>
-            <a href="/api/docs/">View API Documentation</a>
+            <a href="/api/docs/">Swagger Docs</a>
+            <a href="/api/actors/">Actors</a>
+            <a href="/api/plays/">Plays</a>
+            <a href="/api/reservations/">Reservations</a>
+            <a href="/api/reservations/1/tickets/">Sample Ticket</a>
+            <a href="/admin/">Admin</a>
         </div>
     </body>
     </html>
     """)
 
 urlpatterns = [
+    path('', homepage),
     path('admin/', admin.site.urls),
+
     path('api/', include('theatre.urls')),
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('', homepage),
 ]
