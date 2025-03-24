@@ -1,6 +1,7 @@
 asgiref==3.8.1
 attrs==25.3.0
 crispy-bootstrap4==2022.1
+dj-database-url==2.2.0
 Django==4.0.4
 django-cors-headers==4.5.0
 django-crispy-forms==1.14.0
